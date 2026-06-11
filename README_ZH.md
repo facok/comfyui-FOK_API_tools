@@ -1,6 +1,6 @@
 # comfyui-FOK_API_tools
 
-这是一个 ComfyUI 自定义节点包，用于通过多种请求协议调用文本和视觉大模型 API。
+这是一个 ComfyUI 自定义节点包，用于通过多种供应商兼容请求协议调用文本和视觉大模型 API。
 
 ## 节点
 
@@ -15,7 +15,7 @@
 - `anthropic_messages`
 - `gemini_generatecontent`
 
-这个节点适合直接调用原生供应商 API，也适合配合 `cc-switch` 这类切换/代理服务使用。代理后端可以根据不同路由接收不同 API 兼容格式。
+这个节点适合调用需要特定供应商兼容请求格式的 API 服务。
 
 ## 安装
 
@@ -41,7 +41,7 @@ FOK API Tools/API
 api_key.txt
 ```
 
-文件里只放 API key。`api_key.txt` 已经被 Git 忽略，不会提交。
+文件里只放 API key。
 
 仓库里提供了一个空示例文件：
 
@@ -73,15 +73,6 @@ api_key.txt.example
 | `gemini_generatecontent` | `/models/{model}:generateContent` |
 
 Gemini 的 `api_base_url` 也可以直接填写以 `:generateContent` 结尾的完整 URL，或者使用 `{model}` 占位符。
-
-## cc-switch 用法
-
-把 `api_base_url` 设置为 `cc-switch` 暴露的 base URL，然后根据该路由期望接收的格式选择协议：
-
-- OpenAI Chat Completions 兼容路由：`openai_chat_completions`
-- OpenAI Responses 兼容路由：`openai_responses`
-- Anthropic Messages 兼容路由：`anthropic_messages`
-- Gemini 原生 GenerateContent 兼容路由：`gemini_generatecontent`
 
 节点会发送对应供应商兼容的 JSON 请求体，图片会以 base64 PNG 数据发送。
 

@@ -37,18 +37,18 @@ PROTOCOL_TOOLTIP = (
     "openai_responses -> /responses; "
     "anthropic_messages -> /messages; "
     "gemini_generatecontent -> /models/{model}:generateContent. "
-    "For cc-switch, select the format expected by the target route."
+    "Select the format expected by your API service."
 )
 
 MODEL_TOOLTIP = (
     "Model name passed through unchanged, for example gpt-4o, claude-3-5-sonnet-latest, "
-    "gemini-2.5-flash, or the model alias configured in your proxy."
+    "gemini-2.5-flash, or a model alias configured by your API service."
 )
 
 BASE_URL_TOOLTIP = (
-    "Base URL for the API or proxy. The node appends the endpoint for the selected protocol. "
+    "Base URL for the API service. The node appends the endpoint for the selected protocol. "
     "Examples: https://api.openai.com/v1, https://api.anthropic.com/v1, "
-    "https://generativelanguage.googleapis.com/v1beta, or your cc-switch base URL. "
+    "or https://generativelanguage.googleapis.com/v1beta. "
     "For Gemini you may also provide a full URL ending in :generateContent or include {model}."
 )
 
@@ -167,14 +167,13 @@ def first_text_from_gemini(response_json: Dict[str, Any]) -> str:
 
 class FOKMultiProtocolChatVisionAPI:
     """
-    Sends text and up to four images to OpenAI, Anthropic, Gemini, or compatible
-    switching proxies such as cc-switch.
+    Sends text and up to four images to OpenAI, Anthropic, Gemini, or compatible API services.
     """
 
     CATEGORY = "FOK API Tools/API"
     DESCRIPTION = (
         "Send text and up to four images to OpenAI Chat Completions, OpenAI Responses, "
-        "Anthropic Messages, Gemini GenerateContent, or a compatible proxy such as cc-switch. "
+        "Anthropic Messages, Gemini GenerateContent, or another compatible API service. "
         "API keys are loaded from a local file instead of being stored in the workflow."
     )
     FUNCTION = "execute"
@@ -280,7 +279,7 @@ class FOKMultiProtocolChatVisionAPI:
                         "default": "2023-06-01",
                         "tooltip": (
                             "Anthropic API version header used only for anthropic_messages. "
-                            "Leave default unless your proxy or Anthropic API requires another value."
+                            "Leave default unless your API service requires another value."
                         ),
                     },
                 ),

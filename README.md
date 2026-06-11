@@ -1,6 +1,6 @@
 # comfyui-FOK_API_tools
 
-ComfyUI custom nodes for calling text and vision LLM APIs through multiple request protocols.
+ComfyUI custom nodes for calling text and vision LLM APIs through multiple provider-compatible request protocols.
 
 ## Nodes
 
@@ -15,7 +15,7 @@ Supported protocol formats:
 - `anthropic_messages`
 - `gemini_generatecontent`
 
-This is useful for native provider APIs and switching/proxy services such as `cc-switch`, where the same backend may accept different API-compatible formats.
+This is useful when an API service expects one of these provider-compatible request formats.
 
 ## Installation
 
@@ -41,7 +41,7 @@ Create a local key file in this node directory:
 api_key.txt
 ```
 
-Put only the API key in that file. `api_key.txt` is ignored by Git.
+Put only the API key in that file.
 
 An empty example file is included:
 
@@ -73,15 +73,6 @@ The node appends the protocol endpoint to `api_base_url`:
 | `gemini_generatecontent` | `/models/{model}:generateContent` |
 
 For Gemini, `api_base_url` can also be a full URL ending with `:generateContent`, or can contain `{model}` as a placeholder.
-
-## cc-switch Usage
-
-Set `api_base_url` to the base URL exposed by `cc-switch`, then select the protocol format expected by that route:
-
-- OpenAI Chat Completions-compatible route: `openai_chat_completions`
-- OpenAI Responses-compatible route: `openai_responses`
-- Anthropic Messages-compatible route: `anthropic_messages`
-- Gemini native GenerateContent-compatible route: `gemini_generatecontent`
 
 The node sends provider-compatible JSON bodies and image payloads as base64 PNG data.
 
